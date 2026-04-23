@@ -1,4 +1,4 @@
-# 📧 InboxSense: Pro-Grade Semantic Email RAG
+# 📧 InboxSense: Semantic Email RAG
 
 [![Model: Gemini 2.5 Stable](https://img.shields.io/badge/AI-Gemini%202.5%20Stable-blueviolet)](https://ai.google.dev/)
 [![Database: ChromaDB v2](https://img.shields.io/badge/Vector%20DB-ChromaDB%20v2-orange)](https://www.trychroma.com/)
