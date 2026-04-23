@@ -1,60 +1,50 @@
 import React from 'react';
 import Link from 'next/link';
-import { auth, signIn, signOut } from "@/lib/auth";
+import { auth, signIn, signOut } from "@/core/identity";
 
+/**
+ * InboxSense Premium Landing Page.
+ * Designed with Glassmorphism and FAANG aesthetics.
+ */
 export default async function Home() {
   const session = await auth();
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      height: '100vh',
-      gap: '2rem',
-      padding: '2rem'
-    }}>
-      <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', maxWidth: '600px' }}>
-        <h1 className="gradient-text" style={{ fontSize: '3.5rem', marginBottom: '1rem', fontWeight: 800 }}>
-          InboxIntelligence
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] flex flex-col items-center justify-center p-8 gap-12">
+      
+      {/* Hero Section */}
+      <div className="glass-panel p-12 text-center max-w-2xl animate-in fade-in zoom-in duration-700">
+        <h1 className="gradient-text text-6xl font-extrabold mb-6 tracking-tight">
+          InboxSense
         </h1>
-        <p style={{ color: 'var(--secondary)', fontSize: '1.2rem', lineHeight: '1.6' }}>
+        <p className="text-secondary text-xl leading-relaxed mb-10">
           {session 
             ? `Welcome back, ${session.user?.name}. Your AI is ready to analyze your inbox.`
-            : "The premium AI research platform for your Gmail and Outlook accounts."}
+            : "The next-generation AI intelligence platform for your email ecosystem."}
         </p>
         
-        <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+        <div className="flex gap-4 justify-center">
           {!session ? (
-            <>
+            <div className="flex flex-col sm:flex-row gap-4">
               <form action={async () => {
                 "use server";
                 await signIn("google");
               }}>
-                <button className="glass-panel" style={{ padding: '1rem 2rem', cursor: 'pointer', background: 'var(--accent)', color: '#fff', border: 'none' }}>
-                  Sign in with Google
+                <button className="glass-panel px-8 py-4 bg-accent text-white font-bold hover:opacity-90 transition-all border-none">
+                  Get Started with Google
                 </button>
               </form>
-              <form action={async () => {
-                "use server";
-                await signIn("azure-ad");
-              }}>
-                <button className="glass-panel" style={{ padding: '1rem 2rem', cursor: 'pointer', background: '#323130', color: '#fff', border: 'none' }}>
-                  Sign in with Outlook
-                </button>
-              </form>
-            </>
+            </div>
           ) : (
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <Link href="/dashboard" className="glass-panel" style={{ padding: '1rem 2rem', cursor: 'pointer', background: 'var(--accent)', textDecoration: 'none', color: '#fff' }}>
-                Open Dashboard
+            <div className="flex gap-4">
+              <Link href="/dashboard" className="glass-panel px-8 py-4 bg-accent text-white font-bold hover:opacity-90 transition-all no-underline">
+                Enter Dashboard
               </Link>
               <form action={async () => {
                 "use server";
                 await signOut();
               }}>
-                <button className="glass-panel" style={{ padding: '1rem 2rem', cursor: 'pointer', border: 'none', color: '#fff', background: 'transparent' }}>
+                <button className="glass-panel px-8 py-4 bg-white/5 text-white hover:bg-white/10 transition-all border-none">
                   Sign Out
                 </button>
               </form>
@@ -63,20 +53,28 @@ export default async function Home() {
         </div>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', maxWidth: '900px', width: '100%' }}>
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>Sync Engine</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--secondary)' }}>Stable. Waiting for OAuth2 handshake.</p>
+      {/* Feature Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl w-full">
+        <div className="glass-panel p-8 hover:border-accent/30 transition-colors">
+          <h3 className="text-xl font-bold mb-3 text-accent">RAG Engine</h3>
+          <p className="text-secondary text-sm leading-relaxed">
+            Proprietary Retrieval Augmented Generation for noise-free inbox analysis.
+          </p>
         </div>
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>Vector Index</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--secondary)' }}>Initializing ChromaDB bridge.</p>
+        <div className="glass-panel p-8 hover:border-accent/30 transition-colors">
+          <h3 className="text-xl font-bold mb-3 text-accent">Vector Index</h3>
+          <p className="text-secondary text-sm leading-relaxed">
+            Sub-millisecond semantic search powered by high-dimension ChromaDB.
+          </p>
         </div>
-        <div className="glass-panel" style={{ padding: '1.5rem' }}>
-          <h3 style={{ marginBottom: '0.5rem' }}>AI Brain</h3>
-          <p style={{ fontSize: '0.9rem', color: 'var(--secondary)' }}>Gemini 1.5 Pro stand-by.</p>
+        <div className="glass-panel p-8 hover:border-accent/30 transition-colors">
+          <h3 className="text-xl font-bold mb-3 text-accent">Gemini Core</h3>
+          <p className="text-secondary text-sm leading-relaxed">
+            Powered by Google's latest 2026 multimodal intelligence models.
+          </p>
         </div>
       </div>
+
     </div>
   );
 }

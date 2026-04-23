@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import { RefreshCw, Mail, Brain, Shield, Search, Trash2 } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -73,7 +74,9 @@ export default function Dashboard() {
       {/* Header */}
       <header className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-3xl font-bold gradient-text mb-2">InboxSense</h1>
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <h1 className="text-3xl font-bold gradient-text mb-2">InboxSense</h1>
+          </Link>
           <p className="text-secondary">Connected to {session?.user?.email}</p>
         </div>
         <div className="flex gap-4">
