@@ -90,4 +90,4 @@ For deep technical dives, refer to our specialized documentation:
 ---
 
 ## 📜 License
-Built with ❤️ for the 2026 AI Ecosystem. Distributed under the MIT License.
+Distributed under the MIT License.
